@@ -1,0 +1,131 @@
+img {
+  width: 220px;
+  height: 200px;
+}
+
+
+.dark {
+		color: #f9f9f9;
+		text-shadow: 1px 1px #000000;
+
+		background: #333333;
+	}
+		.dark .menu-item:hover {
+			background: #444444;
+		}
+		.dark .menu-item-note {
+			color: #eeeeee;
+		}
+		.dark .menu-item-link a {
+			color: #f9f9f9;
+		}
+		.dark .sub-menu-arrow {
+			border-left-color: #f9f9f9;
+		}
+		.dark .menu-item-disabled {
+			color: #777777;
+			text-shadow: none;
+		}
+		.dark .menu-item-disabled:hover {
+			background: #333333;
+		}
+
+	.light {
+		color: #333333;
+		text-shadow: 1px 1px #ffffff;
+
+		background: #f9f9f9;
+	}
+		.light .menu-item:hover {
+			background: #eeeeee;
+		}
+		.light .menu-item-note {
+			color: #555555;
+		}
+		.light .menu-item-link a {
+			color: #333333;
+		}
+		.light .sub-menu-arrow {
+			border-left-color: #333333;
+		}
+		.light .menu-item-disabled {
+			color: #999999;
+			text-shadow: none;
+		}
+		.light .menu-item-disabled:hover {
+			background: #f9f9f9;
+		}
+
+	.menu {
+		margin: 0;
+		padding: 0;
+
+		cursor: default;
+
+		list-style: none;
+
+		font-family: arial;
+		font-size: 14px;
+
+		position: absolute;
+
+		box-shadow: 1px 1px 3px #000000;
+	}
+
+		.menu-item {
+			margin: 8px 0;
+			padding: 4px;
+			padding-left: 30px;
+
+			position: relative;
+		}
+			.menu-item-title {
+
+			}
+			.menu-item-link a {
+				text-decoration: none;
+				display: block;
+			}
+			.menu-item-disabled {
+				color: #999999;
+			}
+			.menu-item-disabled:hover {
+				background: #f9f9f9;
+			}
+
+			.menu-item-icon {
+				width: 28px;
+				height: 28px;
+
+				position: absolute;
+				top: 0px;
+				left: 0px;
+			}
+			.menu-item-note {
+				font-size: 12px;
+
+				position: absolute;
+				top: 5px;
+				right: 8px;
+			}
+
+			.sub-menu {
+				display: none;
+			}
+			.menu-item:hover > .sub-menu {
+				display: block;
+			}
+
+			.sub-menu-arrow {
+				width: 0; 
+				height: 0;
+
+				position: absolute;
+				top: 7px;
+				right: 8px;
+
+				border-top: 6px solid transparent;
+				border-bottom: 6px solid transparent;
+				
+				border-left: 8px solid #333333;
+			}
