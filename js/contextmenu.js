@@ -6,6 +6,14 @@
 
     var methods = {
 
+        /*
+         * Overwrite default configuration
+         */
+        init: function(options) {
+            // Extend the configuration
+            $.extend(config, options);
+        },
+
         /** ------------------------------------------------------------------------
          * Create the contextmenu
          */
@@ -31,25 +39,10 @@
                 }
                 
                 for(var i=0; i<options.length; i++) {
-                    var li = $('<li>');
+                    var li = $('<li>').addClass('menu-item');
 
                     ul.append(li);
 
-                    li.addClass('menu-item');
-
-                    // // Does the item have an icon?
-                    // if(options[i].icon) {
-                    //     var icon = $('<span class="menu-item-icon">');
-
-                    //     icon.css({
-                    //         'backgroundImage': 'url("' + options[i].icon + '")',
-                    //         'backgroundSize':     '633px',
-                    //         'backgroundRepeat':   'no-repeat',
-                    //         'backgroundPosition': '4px -72px'
-                    //     });
-
-                    //     li.append(icon);
-                    // }
 
                     // Is the item disabled
                     if(options[i].disable === true) {
@@ -111,16 +104,14 @@
             // Was the right mouse button clicked?
             if(e.which == 3) {
 
-                var $target = $(e.target),
-                    context = $target.data('context'),
-                    x = e.pageX,
-                    y = e.pageY;
-                    
-                var options = config[context];
+                var context = $(e.target).data('context');
 
-                var menu = methods.createMenu(options, x, y, false);
-
-                $('body').append(menu);
+                if(context !== undefined) {
+                    $('body').append(methods.createMenu(config[context],
+                                     e.pageX,
+                                     e.pageY,
+                                     false));
+                }
             }
         },
 
@@ -133,25 +124,19 @@
             var callback = $(this).data('callback');
 
             // Was a callback function set for this item?
-            if(callback != undefined) {
-                callback();
+            if(typeof window[callback] == 'function') {
+                window[callback]();
             }
         }
         
     };
 
-    // Attach click event
-    $(window).on('mouseup.contextmenu', methods.windowClickHandler);
-
-
     $.fn.contextmenu = function(options) {
-        // Extend the configuration
-        $.extend(config, options);
-
-        methods.init();
+        
+        methods.init(options);
 
         // When the user clicks on the page
-        $(window).on('mouseup.contextmenu', methods.clickHandler);
+        $(window).on('mouseup.contextmenu', methods.windowClickHandler);
 
         // Prevent the context menu from showing
         document.addEventListener('contextmenu', function(e) {
@@ -162,11 +147,11 @@
 
         return this;
     }
+
 }(jQuery, window, document));
 
 $('body').contextmenu({
   'width': 300,
-  'theme': 'light',
   'myImageMenu': [
     {
       'title': 'View',
